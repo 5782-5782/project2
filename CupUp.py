@@ -205,14 +205,14 @@ async def my_event(event):
                 await client.send_message(bot, farm_location)
         except:
             pass
-        # try:
-        #     if str(text.split(" ")[1].replace("*", "")).split("\n")[0] == str(farm_location).split(" ")[1]:
-        #         if hp1<=hp2/10:
-        #             text2 = "/use_great_hp"
-        #         elif hp1<=hp2/2:
-        #             text2 = "/use_middle_hpIII"
-        # except:
-        #     pass
+        try:
+            if str(text.split(" ")[1].replace("*", "")).split("\n")[0] == str(farm_location).split(" ")[1]:
+                if hp1<=hp2/10:
+                    text2 = "/use_great_hp"
+                elif hp1<=hp2/2:
+                    text2 = "/use_middle_hpIII"
+        except:
+            pass
         try:
             if text.split(".")[0] == "На пути ты встретил капчу":
                 cursor.execute('UPDATE users SET state2 = ? WHERE user_id = ?', (2, 1776244625,))

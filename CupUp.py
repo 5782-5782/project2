@@ -201,7 +201,7 @@ async def my_event(event):
                     await client.send_message(bot, "🏞🏛 Озеро Эпсил")
                 else:
                     await client.send_message(bot, "⚓🏛 Чёртова бухта")
-            if str(text.split(" ")[1].replace("*", "")).split("\n")[0] == "Озеро" or str(text.split(" ")[1].replace("*", "")).split("\n")[0] == "Чёртова":
+            elif str(text.split(" ")[1].replace("*", "")).split("\n")[0] != farm_location.split(" ")[1]:
                 await client.send_message(bot, farm_location)
         except:
             pass

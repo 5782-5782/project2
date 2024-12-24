@@ -24,6 +24,7 @@ last = None
 
 connection = sqlite3.connect("farm.db")
 cursor = connection.cursor()
+cursor.execute('DROP TABLE users')
 cursor.execute(
     """CREATE TABLE IF NOT EXISTS users(
 id INTEGER PRIMARY KEY,

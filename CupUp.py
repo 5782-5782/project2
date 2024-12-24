@@ -158,14 +158,14 @@ async def my_event(event):
             text2 = "🥪 Бутерброд [III]"
         elif "🍞 Корка хлеба [II]" in keyboard and hp2-hp1>=75:
             text2 = "🍞 Корка хлеба [II]"
+        elif "Древняя регенерация (1🗡)" in keyboard and hp2>=100:
+            text2 = "Древняя регенерация (1🗡)"
         elif "Внутренняя сила (2🗡; 3🛡)" in keyboard:
             text2 = "Внутренняя сила (2🗡; 3🛡)"
         elif "По наитию (3 🥊)" in keyboard:
             text2 = "По наитию (3 🥊)"
         elif "Точный выпад (1🥊; 2🛡;1 🌬)" in keyboard:
             text2 = "Точный выпад (1🥊; 2🛡;1 🌬)"
-        elif "Древняя регенерация (1🗡)" in keyboard:
-            text2 = "Древняя регенерация (1🗡)"
         elif "Активная защита (3 🛡)" in keyboard:
             text2 = "Активная защита (3 🛡)"
         elif "Пропустить" in keyboard:

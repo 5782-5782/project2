@@ -22,7 +22,7 @@ logging.basicConfig(level=logging.INFO)
 
 last = None
 
-connection = sqlite3.connect("farm1.db")
+connection = sqlite3.connect("farm.db")
 cursor = connection.cursor()
 cursor.execute(
     """CREATE TABLE IF NOT EXISTS users(
@@ -43,7 +43,7 @@ def insert_into():
     profile = cursor.execute('SELECT * FROM users WHERE user_id = ?', (1776244625,)).fetchone()
     print(profile)
     if profile == None:
-        cursor.execute('INSERT INTO users (user_id, time, state1, state2, farm_location, hp1, hp2) VALUES (?, ?, ?, ?, ?, ?, ?)', (1776244625, None, 0, 0, None, None, None, 1000, 0))
+        cursor.execute('INSERT INTO users (user_id, time, state1, state2, farm_location, hp1, hp2, minhp, use_hp) VALUES (?, ?, ?, ?, ?, ?, ?)', (1776244625, None, 0, 0, None, None, None, 1000, 0))
         connection.commit()
 
 insert_into()

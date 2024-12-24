@@ -22,7 +22,7 @@ logging.basicConfig(level=logging.INFO)
 
 last = None
 
-connection = sqlite3.connect("farm.db")
+connection = sqlite3.connect("farming.db")
 cursor = connection.cursor()
 cursor.execute(
     """CREATE TABLE IF NOT EXISTS users(

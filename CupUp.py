@@ -34,8 +34,6 @@ state2 INT,
 farm_location STR,
 hp1 INT,
 hp2 INT,
-minhp INT,
-use_hp INT
 )
 """)
 
@@ -43,7 +41,7 @@ def insert_into():
     profile = cursor.execute('SELECT * FROM users WHERE user_id = ?', (1776244625,)).fetchone()
     print(profile)
     if profile == None:
-        cursor.execute('INSERT INTO users (user_id, time, state1, state2, farm_location, hp1, hp2, minhp, use_hp) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', (1776244625, None, 0, 0, None, None, None, 1000, 0))
+        cursor.execute('INSERT INTO users (user_id, time, state1, state2, farm_location, hp1, hp2) VALUES (?, ?, ?, ?, ?, ?, ?)', (1776244625, None, 0, 0, None, None, None))
         connection.commit()
 
 insert_into()
@@ -61,7 +59,6 @@ async def my_event(event):
     farm_locations = "💦 Сквозь водопад 🌿 Заросли 💧 Спуск к воде 🏖 Побережье"
     state1 = profile[3]
     state2 = profile[4]
-    await client.send_message(log, f"Пон: {profile}")
     if str(event.message.from_id) == "PeerUser(user_id=1776244625)":
         if event.message.text == "/start_cup_up" and state1 == 1:
             await client.send_message(log, "Сессия уже запущена.")
@@ -99,20 +96,7 @@ async def my_event(event):
                     await client.send_message(log, await set_farm_location(event.message.text.split("set_location ")[1]))
             except:
                 await client.send_message(log, "Смена локации не удалась.")
-        if "/set_minhp" in event.message.text:
-            try:
-                await client.send_message(log, await set_minhp(event.message.text.split("set_minhp ")[1]))
-            except:
-                await client.send_message(log, "Смена минимального хп не удалась.")
         
-        if event.message.text == "/use_hp" and use_hp == 0:
-            cursor.execute('UPDATE users SET use_hp = ? WHERE user_id = ?', (1, 1776244625,))
-            connection.commit()
-            await client.send_message(log, "Вы успешно начали использовать хилки.")
-        if event.message.text == "/use_hp" and use_hp == 1:
-            cursor.execute('UPDATE users SET use_hp = ? WHERE user_id = ?', (0, 1776244625,))
-            connection.commit()
-            await client.send_message(log, "Вы успешно закончили использовать хилки.")
         
     try:
         text = event.message.text

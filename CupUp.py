@@ -62,7 +62,6 @@ async def my_event(event):
     state1 = profile[3]
     state2 = profile[4]
     await client.send_message(log, profile)
-    use_hp = profile[9]
     if str(event.message.from_id) == "PeerUser(user_id=1776244625)":
         if event.message.text == "/start_cup_up" and state1 == 1:
             await client.send_message(log, "Сессия уже запущена.")

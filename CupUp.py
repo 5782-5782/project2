@@ -61,7 +61,7 @@ async def my_event(event):
     farm_locations = "💦 Сквозь водопад 🌿 Заросли 💧 Спуск к воде 🏖 Побережье"
     state1 = profile[3]
     state2 = profile[4]
-    await client.send_message(log, profile)
+    await client.send_message(log, f"Пон: {profile}")
     if str(event.message.from_id) == "PeerUser(user_id=1776244625)":
         if event.message.text == "/start_cup_up" and state1 == 1:
             await client.send_message(log, "Сессия уже запущена.")

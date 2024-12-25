@@ -33,7 +33,7 @@ state1 INT,
 state2 INT,
 farm_location STR,
 hp1 INT,
-hp2 INT
+hp2 INT  
 )
 """)
 

@@ -174,8 +174,8 @@ async def my_event(event):
             text2 = "Пропустить"
         elif "⚔️ Найти врагов" in keyboard and hp2-hp1<=1000:
             text2 = "⚔️ Найти врагов"
-        # elif "⚔️ Найти врагов" in keyboard and hp2-hp1>=hp2/2:
-        #     text2 = "/use_middle_hpIII"
+        elif "⚔️ Найти врагов" in keyboard and hp2-hp1>=hp2/2:
+            text2 = "/use_middle_hpIII"
         elif "Ваше здоровье полностью восстановлено" in text:
             text2 = "⚔️ Найти врагов"
         elif text == "Неверно, будь аккуратнее или попадешь в тюрьму":
@@ -205,14 +205,6 @@ async def my_event(event):
                     await client.send_message(bot, "⚓🏛 Чёртова бухта")
             elif str(text.split(" ")[1].replace("*", "")).split("\n")[0] != farm_location.split(" ")[1] and farm_location in keyboard:
                 await client.send_message(bot, farm_location)
-        except:
-            pass
-        try:
-            if str(text.split(" ")[1].replace("*", "")).split("\n")[0] == str(farm_location).split(" ")[1]:
-                if hp1<=hp2/10:
-                    text2 = "/use_great_hp"
-                elif hp1<=hp2/2:
-                    text2 = "/use_middle_hpIII"
         except:
             pass
         try:

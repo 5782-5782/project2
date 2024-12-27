@@ -107,7 +107,7 @@ async def my_event(event):
             connection.commit()
             await client.send_message(log, "Фарм приостановлен из за поломки экипировки")
             await client.forward_messages(log, event.message.id, bot)
-    await asyncio.sleep(2)
+    await asyncio.sleep(1)
     profile = cursor.execute('SELECT * FROM users WHERE user_id = ?', (1776244625,)).fetchone()
     state2 = profile[4]
     hp1 = profile[6]

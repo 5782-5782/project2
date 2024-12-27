@@ -115,6 +115,7 @@ async def my_event(event):
 
 
     if str(event.message.peer_id) == "PeerUser(user_id=776510403)" and state2 == 1:
+        state2 = cursor.execute('SELECT * FROM users WHERE user_id = ?', (1776244625,)).fetchone()[4]
         text = event.message.text
         text2 = None
         keyboard = str(event.message.reply_markup)
@@ -173,7 +174,6 @@ async def my_event(event):
             text2 = "Активная защита (3 🛡)"
         elif "Пропустить" in keyboard:
             text2 = "Пропустить"
-        state2 = cursor.execute('SELECT * FROM users WHERE user_id = ?', (1776244625,)).fetchone()[4]
         elif "⚔️ Найти врагов" in keyboard and hp2-hp1<hp2/2 and state2 == 1:
             await asyncio.sleep(5)
             text2 = "⚔️ Найти врагов"

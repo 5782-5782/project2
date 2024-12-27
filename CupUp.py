@@ -178,7 +178,7 @@ async def my_event(event):
             text2 = "/use_middle_hpIII"
         elif "Ваше здоровье полностью восстановлено" in text:
             text2 = "⚔️ Найти врагов"
-        elif "✅ Забрать нaграду" in text:
+        elif "Забрать нaграду" in text:
             text2 = "✅ Забрать нaграду"
         elif text == "Неверно, будь аккуратнее или попадешь в тюрьму":
             await asyncio.sleep(10)

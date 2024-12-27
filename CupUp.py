@@ -130,7 +130,7 @@ async def my_event(event):
             cursor.execute('UPDATE users SET hp1 = ? WHERE user_id = ?', (hp1, 1776244625,))
             cursor.execute('UPDATE users SET hp2 = ? WHERE user_id = ?', (hp2, 1776244625,))
             connection.commit()
-            if hp2-hp1<=1000:
+            if hp2-hp1<=hp2/2:
                 text2 = "⚔️ Найти врагов"
         if "В голову" in keyboard:
             kombo = random.randint(1, 5)
@@ -172,7 +172,7 @@ async def my_event(event):
             text2 = "Активная защита (3 🛡)"
         elif "Пропустить" in keyboard:
             text2 = "Пропустить"
-        elif "⚔️ Найти врагов" in keyboard and hp2-hp1<=1000:
+        elif "⚔️ Найти врагов" in keyboard and hp2-hp1<hp2/2:
             text2 = "⚔️ Найти врагов"
         elif "⚔️ Найти врагов" in keyboard and hp2-hp1>=hp2/2:
             text2 = "/use_middle_hpIII"

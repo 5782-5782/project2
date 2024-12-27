@@ -76,7 +76,7 @@ async def my_event(event):
             await client.send_message(log, "Сессия успешно остановлена.")
         
         
-        if event.message.text == "/start_farm" and state2 == 0:
+        if event.message.text == "/start_farm" and state2 == 0 or state2 == 2:
             cursor.execute('UPDATE users SET state2 = ? WHERE user_id = ?', (1, 1776244625,))
             connection.commit()
             await client.send_message(log, "Вы успешно начали фармить.")
@@ -84,7 +84,7 @@ async def my_event(event):
             await client.send_message(await client.get_entity('t.me/EpsilionWarBot'), "⚔️ Найти врагов")
         if event.message.text == "/start_farm" and state2 == 1:
             await client.send_message(log, "Вы уже фармите.")
-        if event.message.text == "/stop_farm" and state2 == 1:
+        if event.message.text == "/stop_farm" and state2 == 1 or state2 == 2:
             cursor.execute('UPDATE users SET state2 = ? WHERE user_id = ?', (0, 1776244625,))
             connection.commit()
             await client.send_message(log, "Вы успешно закончили фармить.")

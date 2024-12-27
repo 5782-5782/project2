@@ -173,12 +173,13 @@ async def my_event(event):
             text2 = "Активная защита (3 🛡)"
         elif "Пропустить" in keyboard:
             text2 = "Пропустить"
-        elif "⚔️ Найти врагов" in keyboard and hp2-hp1<hp2/2:
+        state2 = cursor.execute('SELECT * FROM users WHERE user_id = ?', (1776244625,)).fetchone()[4]
+        elif "⚔️ Найти врагов" in keyboard and hp2-hp1<hp2/2 and state2 == 1:
             await asyncio.sleep(5)
             text2 = "⚔️ Найти врагов"
-        elif "⚔️ Найти врагов" in keyboard and hp2-hp1>=hp2/2:
+        elif "⚔️ Найти врагов" in keyboard and hp2-hp1>=hp2/2 and state2 == 1:
             text2 = "/use_middle_hpIII"
-        elif "Ваше здоровье полностью восстановлено" in text:
+        elif "Ваше здоровье полностью восстановлено" in text and state2 == 1:
             text2 = "⚔️ Найти врагов"
         elif text == "Неверно, будь аккуратнее или попадешь в тюрьму":
             await asyncio.sleep(10)

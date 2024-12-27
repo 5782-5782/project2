@@ -196,6 +196,7 @@ async def my_event(event):
             await client.send_message(log, f"Вы попали в тюрьму \n\n{last}")
             await client.send_message(bot, "2")
         elif "Ты победил своего врага" in text:
+            text2 = "✅ Забрать нaграду"
             await client.forward_messages(log, event.message.id, bot)
         try:
             if str(text.split(" ")[1].replace("*", "")).split("\n")[0] == "Цирта":

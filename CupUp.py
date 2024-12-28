@@ -133,7 +133,7 @@ async def my_event(event):
             if hp2-hp1<=hp2/2:
                 await asyncio.sleep(5)
                 text2 = "⚔️ Найти врагов"
-        if "В голову" in keyboard:
+        if "В голову" in keyboard and "(0/" not in text:
             kombo = random.randint(1, 5)
             if kombo == 1:
                 text2 = "В голову"
@@ -157,21 +157,21 @@ async def my_event(event):
                 text2 = "Пояс, ноги, голова"
             if kombo == 5:
                 text2 = "Ноги, голова, грудь"
-        elif "🥪 Бутерброд [III]" in keyboard and hp2-hp1>=300:
+        elif "🥪 Бутерброд [III]" in keyboard and hp2-hp1>=300  and "(0/" not in text:
             text2 = "🥪 Бутерброд [III]"
-        elif "🍞 Корка хлеба [II]" in keyboard and hp2-hp1>=75:
+        elif "🍞 Корка хлеба [II]" in keyboard and hp2-hp1>=75  and "(0/" not in text:
             text2 = "🍞 Корка хлеба [II]"
-        elif "Древняя регенерация (1🗡)" in keyboard and hp2-hp1>=100:
+        elif "Древняя регенерация (1🗡)" in keyboard and hp2-hp1>=100 and "(0/" not in text:
             text2 = "Древняя регенерация (1🗡)"
-        elif "Внутренняя сила (2🗡; 3🛡)" in keyboard:
+        elif "Внутренняя сила (2🗡; 3🛡)" in keyboard  and "(0/" not in text:
             text2 = "Внутренняя сила (2🗡; 3🛡)"
-        elif "По наитию (3 🥊)" in keyboard:
+        elif "По наитию (3 🥊)" in keyboard and "(0/" not in text:
             text2 = "По наитию (3 🥊)"
-        elif "Точный выпад (1🥊; 2🛡;1 🌬)" in keyboard:
+        elif "Точный выпад (1🥊; 2🛡;1 🌬)" in keyboard and "(0/" not in text:
             text2 = "Точный выпад (1🥊; 2🛡;1 🌬)"
-        elif "Активная защита (3 🛡)" in keyboard:
+        elif "Активная защита (3 🛡)" in keyboard and "(0/" not in text:
             text2 = "Активная защита (3 🛡)"
-        elif "Пропустить" in keyboard:
+        elif "Пропустить" in keyboard and "(0/" not in text:
             text2 = "Пропустить"
         elif "⚔️ Найти врагов" in keyboard and hp2-hp1<hp2/2:
             await asyncio.sleep(5)

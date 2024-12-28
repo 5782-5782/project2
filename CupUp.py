@@ -200,6 +200,9 @@ async def my_event(event):
         elif "Ты победил своего врага" in text:
             text2 = "✅ Забрать нaграду"
             await client.forward_messages(log, event.message.id, bot)
+        elif "попытался сбежать" in text and "В зону охоты" in keyboard:
+            text2 = "В зону охоты"
+            await client.forward_messages(log, event.message.id, bot)
         try:
             if str(text.split(" ")[1].replace("*", "")).split("\n")[0] == "Цирта":
                 await client.send_message(bot, "🏡🏛 Грейт-Йелдем")

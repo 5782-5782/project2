@@ -3,7 +3,7 @@ import logging
 import datetime
 import random
 import string
-import sqlite3
+import aiogram
 
 from aiogram import Bot, Dispatcher, types
 from aiogram import F
@@ -15,7 +15,7 @@ from aiogram.client.bot import DefaultBotProperties
 
 default=DefaultBotProperties(parse_mode='html')
 logging.basicConfig(level=logging.INFO)
-bot = Bot('7555514526:AAEJAdH3UpPv4S2Fu7RrEaz3EFfE1dSrpGI')
+bot = Bot('7775440771:AAFLb1IJg1gOoQmnhNosUKkvg0eG_VC_YPg')
 bot1 = Bot('7566430370:AAGMGbA7H0lE75PUCXnhIlr9QWGc5bQyxGg')
 bot2 = Bot('7738138639:AAGRga5bEmp-Sj0qtMADJF97x0bBtTiEV9s')
 bot3 = Bot('7885243241:AAHw6GlLRrizM5Jfxe9WTc_Vn3Bo152q_dI')
@@ -66,7 +66,7 @@ async def handle_rp_command(message: Message):
         await bot1.send_message(-1002445135554, "А ещё он великан! Чёртов великан метр восемьдесят! ")
         await asyncio.sleep(1)
         await bot2.send_message(-1002445135554, "Точно! На цепь его! И в намордник! Мутант-переросток! ")
-        await bot3.send_message(-1002445135554, "Так что выдайте нам его немедленно. Пусть даже не надеется что лив из Эпсы его спасёт! Никто не покидает Эпсу так просто... Часть команды - часть корабля! Под вечным правлением величайшего из нижайших - Кельта! Мы посадим Глефа на цепь в подвале, и заставим вечно играть в Эпсилон вар и восхвалять в общаке разработчиков в целом и Кельта лично!"")
+        await bot3.send_message(-1002445135554, "Так что выдайте нам его немедленно. Пусть даже не надеется что лив из Эпсы его спасёт! Никто не покидает Эпсу так просто... Часть команды - часть корабля! Под вечным правлением величайшего из нижайших - Кельта! Мы посадим Глефа на цепь в подвале, и заставим вечно играть в Эпсилон вар и восхвалять в общаке разработчиков в целом и Кельта лично!")
         await asyncio.sleep(1)
         await bot1.send_message(-1002445135554, "И выстройтесь по росту! Всем, кто выше полутора метров мы отпилим ноги и примем в нашу общину! Быстрее, чёртовы гиганты!")
         await bot5.send_message(-1002445135554, "Споры, ругань, приход ежа")

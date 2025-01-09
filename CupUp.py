@@ -273,6 +273,7 @@ BOT_TOKEN = '7775440771:AAFLb1IJg1gOoQmnhNosUKkvg0eG_VC_YPg'
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
 
+logging.basicConfig(level=logging.INFO)
 connection2 = sqlite3.connect("RP.db")
 cursor2 = connection2.cursor()
 cursor2.execute(

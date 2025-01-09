@@ -543,14 +543,10 @@ async def inline_result(inline: ChosenInlineResult):
 
 
 
-
-
 if __name__ == '__main__':
     client.start()
     client.run_until_disconnected()
-
-async def main():
-    await dp.start_polling(bot)
+    asyncio.run(main())
 
 async def main():
     await dp.start_polling(bot)

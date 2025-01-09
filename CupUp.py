@@ -269,7 +269,7 @@ from aiogram import F
 from aiogram.types import Message, InlineKeyboardButton, WebAppInfo, CallbackQuery, ChosenInlineResult
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
-ogging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.INFO)
 BOT_TOKEN = '7775440771:AAFLb1IJg1gOoQmnhNosUKkvg0eG_VC_YPg'
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()

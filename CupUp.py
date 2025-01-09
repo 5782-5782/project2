@@ -54,7 +54,7 @@ async def my_event(event):
     global last
     log = await client.get_entity(-1002357683604)
     bot = await client.get_entity('t.me/EpsilionWarBot')
-    profile = cursor.execute('SELECT * FROM user WHERE user_id = ?', (1776244625,)).fetchone()
+    profile = cursor.execute('SELECT * FROM users WHERE user_id = ?', (1776244625,)).fetchone()
     farm_location = profile[5]
     farm_locations = "💦 Сквозь водопад 🌿 Заросли 💧 Спуск к воде 🏖 Побережье"
     state1 = profile[3]

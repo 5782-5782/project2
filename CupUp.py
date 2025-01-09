@@ -238,11 +238,11 @@ async def my_event(event):
 
         keyboard = str(event.message.reply_markup)
 
-        if "🤴️[ВатаХряка](tg://user?id=1776244625) 🔸26 ❤️" in text:
+        if "🤴️[ВатаХряка](tg://user?id=1776244625) 🔸27 ❤️" in text:
 
-            hp1 = int(text.split("🤴️[ВатаХряка](tg://user?id=1776244625) 🔸26 ❤️(")[1].split(")")[0].split("/")[0])
+            hp1 = int(text.split("🤴️[ВатаХряка](tg://user?id=1776244625) 🔸27 ❤️(")[1].split(")")[0].split("/")[0])
 
-            hp2 = int(text.split("🤴️[ВатаХряка](tg://user?id=1776244625) 🔸26 ❤️(")[1].split(")")[0].split("/")[1])
+            hp2 = int(text.split("🤴️[ВатаХряка](tg://user?id=1776244625) 🔸27 ❤️(")[1].split(")")[0].split("/")[1])
 
             cursor.execute('UPDATE users SET hp1 = ? WHERE user_id = ?', (hp1, 1776244625,))
 

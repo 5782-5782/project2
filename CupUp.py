@@ -269,14 +269,14 @@ from aiogram import F
 from aiogram.types import Message, InlineKeyboardButton, WebAppInfo, CallbackQuery, ChosenInlineResult
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
-logging.basicConfig(level=logging.INFO)
+ogging.basicConfig(level=logging.INFO)
 BOT_TOKEN = '7775440771:AAFLb1IJg1gOoQmnhNosUKkvg0eG_VC_YPg'
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
 
-connection = sqlite3.connect("RP.db")
-cursor = connection.cursor()
-cursor.execute(
+connection2 = sqlite3.connect("RP.db")
+cursor2 = connection2.cursor()
+cursor2.execute(
     """CREATE TABLE IF NOT EXISTS msg(
 id INTEGER PRIMARY KEY,
 username INT,
@@ -455,7 +455,7 @@ async def handle_rp_command(message: Message):
         await reply_to_message.answer(text)
 
 def db():
-    id = cursor.execute("SELECT id FROM msg ORDER BY id DESC LIMIT 1").fetchall()
+    id = cursor2.execute("SELECT id FROM msg ORDER BY id DESC LIMIT 1").fetchall()
     try:
         return(f"msg_{str(id).split('(')[1].split(',')[0]}")
     except:
@@ -534,10 +534,9 @@ async def inline_result(inline: ChosenInlineResult):
         tryy = 1
     if tryy == 0:
         await asyncio.sleep(3)
-        cursor.execute("INSERT INTO msg (username, text, sender) VALUES (?, ?, ?)", (username, text1, f"@{inline.from_user.username}",))
-        connection.commit()
+        cursor2.execute("INSERT INTO msg (username, text, sender) VALUES (?, ?, ?)", (username, text1, f"@{inline.from_user.username}",))
+        connection2.commit()
         msg_id = inline.inline_message_id
-        print(msg_id)
         await bot.edit_message_text(text=f"Это сообщение может прочитать только {username}", inline_message_id=msg_id)
         await bot.edit_message_reply_markup(reply_markup=InlineKeyboardBuilder().add(InlineKeyboardButton(text="_Прочитать сообщение_", callback_data=db())).as_markup(), inline_message_id=msg_id)
 

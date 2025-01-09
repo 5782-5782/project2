@@ -70,7 +70,7 @@ async def my_event(event):
             await cup_up()
         if event.message.text == "/stop_cup_up" and state1 == 0:
             await client.send_message(log, "Сессия уже остановлена.")
-       if event.message.text == "/stop_cup_up" and state1 == 1:
+        if event.message.text == "/stop_cup_up" and state1 == 1:
             cursor.execute('UPDATE users SET state1 = ? WHERE user_id = ?', (0, 1776244625,))
             connection.commit()
             await client.send_message(log, "Сессия успешно остановлена.")

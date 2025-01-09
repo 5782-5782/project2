@@ -247,7 +247,7 @@ async def set_farm_location(location):
 
 async def set_minhp(hp):
     cursor.execute('UPDATE users SET minhp = ? WHERE user_id = ?', (hp, 1776244625,))
-   connection.commit()
+    connection.commit()
     return(f"Успешно задано минимальное хп {hp}.")
 
 async def cup_up():

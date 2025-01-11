@@ -200,7 +200,7 @@ async def my_event(event):
         elif "Ты победил своего врага" in text:
             text2 = "✅ Забрать нaграду"
             await client.forward_messages(log, event.message.id, bot)
-        elif "попытался сбежать" in text and "В зону охоты" in keyboard:
+        elif "сбежа" in text and "В зону охоты" in keyboard:
             text2 = "В зону охоты"
             await client.forward_messages(log, event.message.id, bot)
         try:
@@ -212,7 +212,11 @@ async def my_event(event):
                 else:
                     await client.send_message(bot, "⚓🏛 Чёртова бухта")
             elif str(text.split(" ")[1].replace("*", "")).split("\n")[0] != farm_location.split(" ")[1] and farm_location in keyboard:
+                await client.send_message(bot, "3")
+                await asyncio.sleep(1)
                 await client.send_message(bot, farm_location)
+                await asyncio.sleep(1)
+                await client.send_message(bot, "2")
         except:
             pass
         try:

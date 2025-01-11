@@ -232,8 +232,12 @@ async def my_event(event):
             pass
         try:
             if "Ты отправляешься в ближайший город на восстановление" in text or "Ты был отправлен восстанавливаться в город" in text:
-                await client.send_message(bot, farm_location)
                 await client.forward_messages(log, event.message.id, bot)
+                await client.send_message(bot, "3")
+                await asyncio.sleep(1)
+                await client.send_message(bot, farm_location)
+                await asyncio.sleep(1)
+                await client.send_message(bot, "2")
         except:
             pass
         if text2 != None:

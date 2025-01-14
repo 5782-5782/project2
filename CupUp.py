@@ -97,7 +97,10 @@ async def my_event(event):
             except:
                 await client.send_message(log, "Смена локации не удалась.")
         
-        
+        if event.message.text == "/count@Mishi5782":
+            msgids = [666, 667]
+            msg = client.get_messages(-1002445135554, msgids)
+            print(msg)
     try:
         text = event.message.text
     except:
@@ -270,4 +273,3 @@ async def cup_up():
 if __name__ == '__main__':
     client.start()
     client.run_until_disconnected()
-

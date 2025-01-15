@@ -120,7 +120,10 @@ async def my_event(event):
                 i = i+1
             msg = await client.get_messages(chat_id, ids=counts)
             await client.edit_message(chat_id, msg, msg.message.replace("\n\nПодсчёт продолжается", "\n\nПодсчёт окончен"))
-    
+            
+    if str(event.message.from_id) == "PeerUser(user_id=6636749431)":
+        if event.message.text == "/cupup2":
+            await cup_up2()
     
     try:
         text = event.message.text
@@ -285,10 +288,31 @@ async def set_minhp(hp):
 async def cup_up():
     state1 = cursor.execute('SELECT * FROM users WHERE user_id = ?', (1776244625,)).fetchone()[3]
     while state1 == 1:
-        bot1 = await client.get_entity('t.me/CupLegendBot')
-        await client.send_message(bot1, "/cup_up")
-        await asyncio.sleep(310)
+        bot1 = await client.get_entity('t.me/komila_ekhobot')
+        await client.send_message(bot1, "/cupup2")
+        await asyncio.sleep(250)
         state1 = cursor.execute('SELECT * FROM users WHERE user_id = ?', (1776244625,)).fetchone()[3]
+
+async def cup_up2():
+    await asyncio.sleep(1)
+    bot = await client.get_entity('CupLegendBot')
+    i = 0
+    pers = ["Пудель2", "Пудель3", "Пудель4", "Пудель5", "Пудель"]
+    while i <= 4:
+        await client.send_message(bot, "/start MyHeros")
+        await asyncio.sleep(1)
+        msgs = await client.get_messages('CupLegendBot', 2)
+        msg = msgs[0]
+        await msg.click(text=pers[i])
+        await asyncio.sleep(1)
+        msgs = await client.get_messages('CupLegendBot', 2)
+        msg = msgs[0]
+        await msg.click(text="Выбрать")
+        await asyncio.sleep(1)
+        await client.send_message(bot, "/cup_up")
+        await asyncio.sleep(1)
+        i = i+1
+
 
 
 if __name__ == '__main__':

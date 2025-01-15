@@ -10,14 +10,10 @@ from telethon.tl.functions.channels import GetMessagesRequest
 from telethon.tl.functions.messages import GetHistoryRequest, GetMessagesViewsRequest, ImportChatInviteRequest
 from telethon.tl.types import InputPeerChannel
 
-API_ID2 = 21653220
-API_HASH2 = '0a5270cde18fed26deef4a2a67916c9d'
-session2 = '1ApWapzMBuzB3UkqtfBEFO1tyKtF-tYrS9q4OMC4nGr4WcIfFHxfZzVcbi0mAMQ2XcSAfFOLTGv86ofb5nY_cPq_SPYiWddhSa5YaQEGCZZ_izPfsbGvTSCuVgGghqmOXv_DRpd1KwM63JaZWC8zpaqJtBDRorspPG9mEZuxFEhsemupDikcl_LO7fZHleXZ_OWd5nKKXDXz1Os89nk0lP7ztk7dfbpyv46t2L98S1cFnZNOa6px2qOQfNiw6VFz7xU7B0uJymY6PA1VXQd48l6_oeWjod54PESIzQge0A39BI2HvKKIQeg_k1VXtx3C8nbuHZVOhFPNITErnpaopJBC7X0nRB3E='
-
-
 API_ID=23473442
 API_HASH='0cd1d983e8b65e8d992b3b756f9a8eb1'
-session = '1ApWapzMBu8ainhul7iGgzwlE031N4KAYUlyzH_hzsI2hTRuAADEx8n2OI-Gbpc_TY1MchLNNAgRkEAkob2Hor8YEXtSo8IQCjsvu1AdZQqp-QGcnhUNFcqfa9D4-SZgl3A5i7Db-bafrAqmcSSvEEUZ6vsJuVatsFpJXJFVYk2RHeX9Bu1wBXNhQ4rPsVu4dpx7bkGbXftZDsSjQrmaSE3_rC4p3fbp5h8QrrkBB0K16VrSIts7N_N2MvbM6E9jWrRNAXj3UpZM2PfUblobn4Ewea3f1Kdu27_eMuKHPhc6S8lLxzA9IIgiIZcLCbUi-e4xRSv_5OYZ2FJ-EASuDmV8xJsnZ-b4='
+SESSION = '1ApWapzMBuzl4RsgGLbBz8Obcjd6srZ1fskTF50ohbTRiDBjld3CkcJPSZW2PdDmMo8WrOFgABAfMVOVPPGxFpMyOXClhOqVJT6FnX6J0BjMjJcXiTJ9O9JfXe_DmlFX6XObNcpz7MX6HKUe1HlVDEWwcqo1E7zX9GquhxsuFGRJHw1FwbRmmg-MOpP9up3_cWbEM2c-KpGE6fHJ0b9xin8hNNA-eH9PgBynH3p4EwnF_ddkEbk-_wLJg620JQxEpP6Y8ILTMYLYapI3YUgywEiyMcAga_OE1nL6EtQ_r9mGmdPnXYWbT4ddesfPGDThldFMP1eXf1bgOfEICknJNeVCsJzlDUuY='
+
 logging.basicConfig(level=logging.INFO)
 
 last = None
@@ -46,8 +42,8 @@ def insert_into():
 
 insert_into()
 
-client = TelegramClient(StringSession(session), API_ID, API_HASH, system_version='4.16.30-vxCUSTOM', device_model='aboba-windows-custom', app_version='1.1.0')
-client2 = TelegramClient(StringSession(session), API_ID2, API_HASH2, system_version='4.16.30-vxCUSTOM', device_model='aboba-windows-custom', app_version='1.1.0')
+client = TelegramClient(StringSession(SESSION), API_ID, API_HASH, system_version='4.16.30-vxCUSTOM', device_model='aboba-windows-custom', app_version='1.1.0')
+
 
 @client.on(events.NewMessage)
 async def my_event(event):
@@ -97,10 +93,37 @@ async def my_event(event):
             except:
                 await client.send_message(log, "Смена локации не удалась.")
         
-        if event.message.text == "/count@Mishi5782":
-            msgids = [666, 667]
-            msg = client.get_messages(-1002445135554, msgids)
-            print(msg)
+        try:
+            if event.message.text == "/count@Mishi5782":
+                counts = int(event.message.id)
+                chat_id = await client.get_entity(f"-100{event.message.peer_id.channel_id}")
+                msg = await client.send_message(chat_id, f"Прочитано сообщений: 0/{counts}\n\nПодсчёт продолжается")
+                i = 1
+                while i <=counts:
+                    try:
+                        msg = await client.get_messages(chat_id, counts)
+                        msg2 = await client.get_messages(chat_id, i)
+                        user = await client.get_entity(msg2.from_id.user_id)
+                        userid = f"{user.first_name} {user.last_name} @{user.username} {user.id}"
+                        if userid in msg.message:
+                            count = int(msg.message.split(f"{userid} (")[1].split(")")[0])
+                            await client.edit_message(chat_id, msg, msg.message.replace(f"{userid} ({count}", f"{userid} ({count+1}"))
+                        else:
+                            await client.edit_message(chat_id, msg, msg.message.replace("\n\nПодсчёт продолжается", f"\n\n{userid} (0)\n\nПодсчёт продолжается."))
+                    except:
+                        msg = await client.get_messages(chat_id, counts)
+                        if "Удалённые сообщения (" in msg.message:
+                            count = int(msg.message.split(f"Удалённые сообщения (")[1].split(")")[0])
+                            await client.edit_message(chat_id, msg, msg.message.replace(f"Удалённые сообщения ({count}", f"Удалённые сообщения ({count+1}"))
+                        else:
+                            await client.edit_message(chat_id, msg, msg.message.replace("\n\nПодсчёт продолжается", "\n\nУдалённые сообщения (0)\n\nПодсчёт продолжается."))
+                    i = i+1
+                msg = await client.get_messages(chat_id, counts)
+                await client.edit_message(chat_id, msg, msg.message.replace("\n\nПодсчёт продолжается", "\n\nПодсчёт окончен"))
+        except:
+            pass
+    
+    
     try:
         text = event.message.text
     except:

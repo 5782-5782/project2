@@ -95,7 +95,7 @@ async def my_event(event):
         
         if event.message.text == "/count@Mishi5782":
             counts = int(event.message.id)
-            chat_id = await client.get_entity(f"{event.message.peer_id.channel_id}")
+            chat_id = await client.get_entity(telethon.tl.types.PeerChat(f"-100{event.message.peer_id.channel_id})")
             await client.delete_messages(chat_id, event.message.id)
             msg = await client.send_message(chat_id, f"Прочитано сообщений: 0/{counts}\n\nПодсчёт продолжается")
             i = 1

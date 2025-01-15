@@ -1,4 +1,4 @@
-import telethon
+mport telethon
 import logging
 import sqlite3
 import asyncio

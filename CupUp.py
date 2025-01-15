@@ -93,36 +93,33 @@ async def my_event(event):
             except:
                 await client.send_message(log, "Смена локации не удалась.")
         
-        try:
-            if event.message.text == "/count@Mishi5782":
-                counts = int(event.message.id)
-                chat_id = await client.get_entity(f"-100{event.message.peer_id.channel_id}")
-                msg = await client.send_message(chat_id, f"Прочитано сообщений: 0/{counts}\n\nПодсчёт продолжается")
-                i = 1
-                while i <=counts:
-                    try:
-                        msg = await client.get_messages(chat_id, counts)
-                        msg2 = await client.get_messages(chat_id, i)
-                        user = await client.get_entity(msg2.from_id.user_id)
-                        userid = f"{user.first_name} {user.last_name} @{user.username} {user.id}"
-                        if userid in msg.message:
-                            count = int(msg.message.split(f"{userid} (")[1].split(")")[0])
-                            await client.edit_message(chat_id, msg, msg.message.replace(f"{userid} ({count}", f"{userid} ({count+1}"))
-                        else:
-                            await client.edit_message(chat_id, msg, msg.message.replace("\n\nПодсчёт продолжается", f"\n\n{userid} (0)\n\nПодсчёт продолжается."))
-                    except:
-                        msg = await client.get_messages(chat_id, counts)
-                        if "Удалённые сообщения (" in msg.message:
-                            count = int(msg.message.split(f"Удалённые сообщения (")[1].split(")")[0])
-                            await client.edit_message(chat_id, msg, msg.message.replace(f"Удалённые сообщения ({count}", f"Удалённые сообщения ({count+1}"))
-                        else:
-                            await client.edit_message(chat_id, msg, msg.message.replace("\n\nПодсчёт продолжается", "\n\nУдалённые сообщения (0)\n\nПодсчёт продолжается."))
-                    i = i+1
-                msg = await client.get_messages(chat_id, counts)
-                await client.edit_message(chat_id, msg, msg.message.replace("\n\nПодсчёт продолжается", "\n\nПодсчёт окончен"))
-        except:
+        if event.message.text == "/count@Mishi5782":
+            counts = int(event.message.id)
             chat_id = await client.get_entity(f"-100{event.message.peer_id.channel_id}")
-            await client.send_message(chat_id, "Произошла ошибка см. - в коде.")
+            await client.delete_messages(chat_id, event.message.id)
+            msg = await client.send_message(chat_id, f"Прочитано сообщений: 0/{counts}\n\nПодсчёт продолжается")
+            i = 1
+            while i <=counts:
+                try:
+                    msg = await client.get_messages(chat_id, counts)
+                    msg2 = await client.get_messages(chat_id, i)
+                    user = await client.get_entity(msg2.from_id.user_id)
+                    userid = f"{user.first_name} {user.last_name} @{user.username} {user.id}"
+                    if userid in msg.message:
+                        count = int(msg.message.split(f"{userid} (")[1].split(")")[0])
+                        await client.edit_message(chat_id, msg, msg.message.replace(f"{userid} ({count}", f"{userid} ({count+1}"))
+                    else:
+                        await client.edit_message(chat_id, msg, msg.message.replace("\n\nПодсчёт продолжается", f"\n\n{userid} (0)\n\nПодсчёт продолжается."))
+                except:
+                    msg = await client.get_messages(chat_id, counts)
+                    if "Удалённые сообщения (" in msg.message:
+                        count = int(msg.message.split(f"Удалённые сообщения (")[1].split(")")[0])
+                        await client.edit_message(chat_id, msg, msg.message.replace(f"Удалённые сообщения ({count}", f"Удалённые сообщения ({count+1}"))
+                    else:
+                        await client.edit_message(chat_id, msg, msg.message.replace("\n\nПодсчёт продолжается", "\n\nУдалённые сообщения (0)\n\nПодсчёт продолжается."))
+                    i = i+1
+            msg = await client.get_messages(chat_id, counts)
+            await client.edit_message(chat_id, msg, msg.message.replace("\n\nПодсчёт продолжается", "\n\nПодсчёт окончен"))
     
     
     try:

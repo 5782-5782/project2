@@ -121,7 +121,8 @@ async def my_event(event):
                 msg = await client.get_messages(chat_id, counts)
                 await client.edit_message(chat_id, msg, msg.message.replace("\n\nПодсчёт продолжается", "\n\nПодсчёт окончен"))
         except:
-            pass
+            chat_id = await client.get_entity(f"-100{event.message.peer_id.channel_id}")
+            wait client.send_message(chat_id, "Произошла ошибка см. - в коде.")
     
     
     try:

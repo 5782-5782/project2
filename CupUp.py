@@ -145,9 +145,9 @@ async def my_event(event):
         text = event.message.text
         text2 = None
         keyboard = str(event.message.reply_markup)
-        if "🤴️[ВатаХряка](tg://user?id=1776244625) 🔸27 ❤️" in text:
-            hp1 = int(text.split("🤴️[ВатаХряка](tg://user?id=1776244625) 🔸27 ❤️(")[1].split(")")[0].split("/")[0])
-            hp2 = int(text.split("🤴️[ВатаХряка](tg://user?id=1776244625) 🔸27 ❤️(")[1].split(")")[0].split("/")[1])
+        if "🤴️[ВатаХряка](tg://user?id=1776244625) 🔸28 ❤️" in text:
+            hp1 = int(text.split("🤴️[ВатаХряка](tg://user?id=1776244625) 🔸28 ❤️(")[1].split(")")[0].split("/")[0])
+            hp2 = int(text.split("🤴️[ВатаХряка](tg://user?id=1776244625) 🔸28 ❤️(")[1].split(")")[0].split("/")[1])
             cursor.execute('UPDATE users SET hp1 = ? WHERE user_id = ?', (hp1, 1776244625,))
             cursor.execute('UPDATE users SET hp2 = ? WHERE user_id = ?', (hp2, 1776244625,))
             connection.commit()

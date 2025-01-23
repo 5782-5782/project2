@@ -290,15 +290,15 @@ async def cup_up():
     while state1 == 1:
         bot1 = await client.get_entity('t.me/komila_ekhobot')
         await client.send_message(bot1, "/cupup2")
-        await asyncio.sleep(250)
+        await asyncio.sleep(201)
         state1 = cursor.execute('SELECT * FROM users WHERE user_id = ?', (1776244625,)).fetchone()[3]
 
 async def cup_up2():
     await asyncio.sleep(1)
     bot = await client.get_entity('CupLegendBot')
     i = 0
-    pers = ["Пудель2", "Пудель3", "Пудель4", "Пудель5", "Пудель"]
-    while i <= 4:
+    pers = ["Пудель2", "Пудель3", "Пудель4", "Пудель5", "Пудель6", "Пудель"]
+    while i <= 5:
         await client.send_message(bot, "/start MyHeros")
         await asyncio.sleep(1)
         msgs = await client.get_messages('CupLegendBot', 2)

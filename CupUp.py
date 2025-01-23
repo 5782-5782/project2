@@ -290,7 +290,7 @@ async def cup_up():
     while state1 == 1:
         bot1 = await client.get_entity('t.me/komila_ekhobot')
         await client.send_message(bot1, "/cupup2")
-        await asyncio.sleep(201)
+        await asyncio.sleep(202)
         state1 = cursor.execute('SELECT * FROM users WHERE user_id = ?', (1776244625,)).fetchone()[3]
 
 async def cup_up2():

@@ -297,16 +297,13 @@ async def cup_up2():
     await asyncio.sleep(1)
     bot = await client.get_entity('CupLegendBot')
     i = 0
-    pers = ["Пудель2", "Пудель3", "Пудель4", "Пудель5", "Пудель6", "Пудель"]
-    while i <= 5:
+    pers = ["Пудель2", "Пудель3", "Пудель4", "Пудель5", "Пудель6", "Пудель7", "Пудель8", "Пудель9", "Пудель10", "Пудель"]
+    while i < 10:
         await client.send_message(bot, "/start MyHeros")
         await asyncio.sleep(1)
         msgs = await client.get_messages('CupLegendBot', 2)
         msg = msgs[0]
         await msg.click(text=pers[i])
-        await asyncio.sleep(1)
-        msgs = await client.get_messages('CupLegendBot', 2)
-        msg = msgs[0]
         await msg.click(text="Выбрать")
         await asyncio.sleep(1)
         await client.send_message(bot, "/cup_up")

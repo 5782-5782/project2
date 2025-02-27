@@ -304,6 +304,8 @@ async def cup_up2():
         msgs = await client.get_messages('CupLegendBot', 2)
         msg = msgs[0]
         await msg.click(text=pers[i])
+        msgs = await client.get_messages('CupLegendBot', 2)
+        msg = msgs[0]
         await msg.click(text="Выбрать")
         await asyncio.sleep(1)
         await client.send_message(bot, "/cup_up")

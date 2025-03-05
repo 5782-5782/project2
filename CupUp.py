@@ -3,7 +3,6 @@ import json
 import requests
 from requests import request
 import datetime
-import random
 
 from aiogram import Bot, Dispatcher, types
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
@@ -41,7 +40,7 @@ async def limit(method, url):
                 time = datetime.datetime.now()
                 result = request(method=method, url=url)
                 return(result)
-        elif step < 2:
+        elif step <=1:
             if method==None:
                 print(datetime.datetime.now())
                 step = step+1
@@ -53,7 +52,7 @@ async def limit(method, url):
                 result = request(method=method, url=url)
                 return(result)
         else:
-            await asyncio.sleep(random.randint(1, 2))
+            await asyncio.sleep(1)
             dtime = time1()
             step = step1()
 

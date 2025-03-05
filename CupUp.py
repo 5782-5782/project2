@@ -52,7 +52,6 @@ async def limit(method, url):
                 result = request(method=method, url=url)
                 return(result)
         else:
-            await asyncio.sleep(1)
             dtime = time1()
             step = step1()
 

@@ -41,7 +41,7 @@ async def limit(method, url):
                 time = datetime.datetime.now()
                 result = request(method=method, url=url)
                 return(result)
-        elif step < 4:
+        elif step < 2:
             if method==None:
                 print(datetime.datetime.now())
                 step = step+1

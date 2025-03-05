@@ -40,7 +40,7 @@ async def limit(method, url):
                 time = datetime.datetime.now()
                 result = request(method=method, url=url)
                 return(result)
-        elif step ==1:
+        elif step <10:
             if method==None:
                 print(datetime.datetime.now())
                 step = step+1
@@ -52,6 +52,7 @@ async def limit(method, url):
                 result = request(method=method, url=url)
                 return(result)
         else:
+            await asyncio.sleep(0.1)
             dtime = time1()
             step = step1()
 

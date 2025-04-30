@@ -18,6 +18,11 @@ SESSION = '1ApWapzMBu2Uk4Hp0Dqd4ldUu8GFEmdHQ5zD6pbfsQQsIVG5Rj-seeoOb7frP90rMSQER
 logging.basicConfig(level=logging.INFO)
 
 last = None
+pers=[]
+state=0
+tume=132
+
+
 
 connection = sqlite3.connect("farming.db")
 cursor = connection.cursor()

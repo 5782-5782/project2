@@ -14,12 +14,12 @@ logging.basicConfig(level=logging.INFO)
 
 client = TelegramClient(StringSession(SESSION), API_ID, API_HASH, system_version='4.16.30-vxCUSTOM', device_model='aboba-windows-custom', app_version='1.1.0')
 pers=[]
-
 state=0
 tume=132
 
 async def pon():
     global state, pers
+    pers=[]
     bot = await client.get_entity('CupLegendBot')
     i = 0
     perso = ["MORGENSHTERN", "Леон", "Крейзи", "Голубь", "Ямаль", "Карти", "Тиг", "Слитые", "Биток", "Легенд"]
@@ -61,7 +61,7 @@ async def cup_up():
             
 
 async def cup_up2():
-    global pers
+    global pers, state
     await asyncio.sleep(1)
     bot = await client.get_entity('CupLegendBot')
     i = 0

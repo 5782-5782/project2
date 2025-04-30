@@ -64,7 +64,9 @@ async def pon():
             await asyncio.sleep(1)
             msgs = await client.get_messages('CupLegendBot', 1)
             msg = msgs[0]
+            await asyncio.sleep(1)
             await msg.click(text=perso[i])
+            await asyncio.sleep(1)
             msgs = await client.get_messages('CupLegendBot', 1)
             pers.append(msgs[0])
             await asyncio.sleep(1)

@@ -81,7 +81,7 @@ async def cup_up():
             
 
 async def cup_up2():
-    global pers
+    global pers, state
     await asyncio.sleep(1)
     bot = await client.get_entity('CupLegendBot')
     i = 0

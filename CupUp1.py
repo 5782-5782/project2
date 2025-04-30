@@ -20,7 +20,6 @@ async def pon():
     global state, pers
     pers=[]
     bot = await client.get_entity('CupLegendBot')
-    log = await client.get_entity('Mishi5782')
     i = 0
     perso = ["MORGENSHTERN", "Леон", "Крейзи", "Голубь", "Ямаль", "Карти", "Тиг", "Слитые", "Биток", "Легенд"]
     await client.send_message(bot, "ВНИМАНИЕ!!!!\nНЕ ИСПОЛЬЗУЙТЕ БОТА НИКАКИМ ОБРАЗОМ ПО КРАЙНЕЙ МЕРЕ 2-3 МИНУТЫ!!!!\nНЕ НАЖИМАЙТЕ КНОПКИ И НЕ ПИШИТЕ ЛЮБЫЕ СООБЩЕНИЯ БОТУ!!!\nЕСЛИ ВЫ СЛУЧАЙНО ЭТО СДЕЛАЛИ, ПЕРЕЗАПУСТИТЕ СКРИПТ!!!")
@@ -31,7 +30,6 @@ async def pon():
             await asyncio.sleep(2)
             msgs = await client.get_messages('CupLegendBot', 1)
             msg = msgs[0]
-            await client.send_message(log, msg)
             await asyncio.sleep(1)
             await msg.click(text=perso[i])
             await asyncio.sleep(1)

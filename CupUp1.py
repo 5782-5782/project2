@@ -4,9 +4,9 @@ import time
 from telethon.sync import TelegramClient, events
 from telethon.sessions import StringSession
 
-API_ID=23473442
-API_HASH='0cd1d983e8b65e8d992b3b756f9a8eb1'
-SESSION = '1ApWapzMBu2Uk4Hp0Dqd4ldUu8GFEmdHQ5zD6pbfsQQsIVG5Rj-seeoOb7frP90rMSQERLRJ4bfIxcclM8KPO6rZ72bkXxAWqS73ZHUGdGCthAeZ9o-UOUziuByOa4pbVDcAoKwAj9cjS0JE3SjKzTtPwc0TlkZUoPz0ypQ4zHIC1QDu7t7B_INbLgq2SD11159aVXPnU6-yabzqA12BmZPyrLRQvQfE0nENrhg81Yrtt7OnILwghPxRIPTNG5St7Fd36_wraJfd-o--KxMerI6fNk1YfYb3O8Qg1MnCBMrixnFQUtRAFh68lXlVU2nXZF9E4G06C9N1r6iKO_d5OY45vucBWJ90='
+API_ID=25980590
+API_HASH='1d281e8e6c14983eecc5aadabf981137'
+SESSION   = '1ApWapzMBu8PQ-AH74JwzGiDk-8szOKAgE-gX9NikTKSRXwY-MQzXAHZ53UWPmcJL51fJ9nOqaVhDikTfmGaHH7wFiyXiyu1jcBV-rTd3yjpblZl5mAy5cSqnNzJ7W50FpC7pEX95sf0gZp664G5mvGMXaJwdzPP4JjWlz7vBRqcsoy_fs_aP2iQKYSoe-vz1fPQodrzLHK9bz-3Ll00Rc4nYncesTTSXUqp7jTbXoLoGYYyRdLF0LbJpvKhl6hnaoa-Ne1QFCoCCAY-rDo2uox2iMYb9Js72XOaG2I72y1G-tozPkg9I8jy2dLMv_mvOtLg3nIas9FL-fo4czEEGaFQ2Ql00BGM='
 
 logging.basicConfig(level=logging.INFO)
 
@@ -21,7 +21,7 @@ async def pon():
     pers=[]
     bot = await client.get_entity('CupLegendBot')
     i = 0
-    perso = ["Пудель2", "Пудель3", "Пудель4", "Пудель5", "Пудель6", "Пудель7", "Пудель8", "Пудель9", "Пудель10", "Пудель"]
+    perso = ["MORGENSHTERN", "Леон", "Крейзи", "Голубь", "Ямаль", "Карти", "Тиг", "Слитые", "Биток", "Легенд"]
     await client.send_message(bot, "ВНИМАНИЕ!!!!\nНЕ ИСПОЛЬЗУЙТЕ БОТА НИКАКИМ ОБРАЗОМ ПО КРАЙНЕЙ МЕРЕ 2-3 МИНУТЫ!!!!\nНЕ НАЖИМАЙТЕ КНОПКИ И НЕ ПИШИТЕ ЛЮБЫЕ СООБЩЕНИЯ БОТУ!!!\nЕСЛИ ВЫ СЛУЧАЙНО ЭТО СДЕЛАЛИ, ПЕРЕЗАПУСТИТЕ СКРИПТ!!!")
     await asyncio.sleep(1)
     while i < 10:
@@ -42,11 +42,11 @@ async def pon():
 @client.on(events.NewMessage)
 async def my_event(event):
     global state
-    if event.message.text=="/start_cup" and state==0 and event.message.to_dict()['from_id']['user_id']==1776244625:
+    if event.message.text=="/start_cup" and state==0 and event.message.to_dict()['from_id']['user_id']==1817889040:
         state=1
         await pon()
         await cup_up()
-    if event.message.text=="/stop_cup" and state==1 and event.message.to_dict()['from_id']['user_id']==1776244625:
+    if event.message.text=="/stop_cup" and state==1 and event.message.to_dict()['from_id']['user_id']==1817889040:
         state=0
 
 

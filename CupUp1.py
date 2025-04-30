@@ -1,6 +1,4 @@
-import telethon
 import logging
-import sqlite3
 import asyncio
 import time
 from telethon.sync import TelegramClient, events
@@ -14,6 +12,7 @@ logging.basicConfig(level=logging.INFO)
 
 client = TelegramClient(StringSession(SESSION), API_ID, API_HASH, system_version='4.16.30-vxCUSTOM', device_model='aboba-windows-custom', app_version='1.1.0')
 pers=[]
+
 state=0
 tume=132
 
@@ -63,7 +62,7 @@ async def cup_up():
             
 
 async def cup_up2():
-    global pers, state
+    global pers
     await asyncio.sleep(1)
     bot = await client.get_entity('CupLegendBot')
     i = 0

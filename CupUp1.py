@@ -27,15 +27,15 @@ async def pon():
     while i < 10:
         if state==1:
             await client.send_message(bot, "/start MyHeros")
-            await asyncio.sleep(5)
+            await asyncio.sleep(2)
             msgs = await client.get_messages('CupLegendBot', 1)
             msg = msgs[0]
-            await asyncio.sleep(5)
+            await asyncio.sleep(2)
             await msg.click(text=perso[i])
-            await asyncio.sleep(5)
+            await asyncio.sleep(2)
             msgs = await client.get_messages('CupLegendBot', 1)
             pers.append(msgs[0])
-            await asyncio.sleep(5)
+            await asyncio.sleep(2)
         i = i+1
 
 

@@ -42,11 +42,11 @@ async def pon():
 @client.on(events.NewMessage)
 async def my_event(event):
     global state
-    if event.message.text=="/start_cup" and state==0 and event.message.to_dict()['from_id']['user_id']==1817889040:
+    if event.message.text=="/start_cup" and state==0 and event.message.to_dict()['from_id']['user_id']==1776244625:
         state=1
         await pon()
         await cup_up()
-    if event.message.text=="/stop_cup" and state==1 and event.message.to_dict()['from_id']['user_id']==1817889040:
+    if event.message.text=="/stop_cup" and state==1 and event.message.to_dict()['from_id']['user_id']==1776244625:
         state=0
 
 

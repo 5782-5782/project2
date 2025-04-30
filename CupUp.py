@@ -4,6 +4,7 @@ import sqlite3
 import asyncio
 import datetime
 import random
+import time
 from telethon.sync import TelegramClient, events
 from telethon.sessions import StringSession
 from telethon.tl.functions.channels import GetMessagesRequest
@@ -44,10 +45,59 @@ insert_into()
 
 client = TelegramClient(StringSession(SESSION), API_ID, API_HASH, system_version='4.16.30-vxCUSTOM', device_model='aboba-windows-custom', app_version='1.1.0')
 
+async def pon():
+    global state, pers
+    pers=[]
+    bot = await client.get_entity('CupLegendBot')
+    i = 0
+    perso = ["Пудель2", "Пудель3", "Пудель4", "Пудель5", "Пудель6", "Пудель7", "Пудель8", "Пудель9", "Пудель10", "Пудель"]
+    await client.send_message(bot, "ВНИМАНИЕ!!!!\nНЕ ИСПОЛЬЗУЙТЕ БОТА НИКАКИМ ОБРАЗОМ ПО КРАЙНЕЙ МЕРЕ 2-3 МИНУТЫ!!!!\nНЕ НАЖИМАЙТЕ КНОПКИ И НЕ ПИШИТЕ ЛЮБЫЕ СООБЩЕНИЯ БОТУ!!!\nЕСЛИ ВЫ СЛУЧАЙНО ЭТО СДЕЛАЛИ, ПЕРЕЗАПУСТИТЕ СКРИПТ!!!")
+    await asyncio.sleep(1)
+    while i < 10:
+        if state==1:
+            await client.send_message(bot, "/start MyHeros")
+            await asyncio.sleep(1)
+            msgs = await client.get_messages('CupLegendBot', 1)
+            msg = msgs[0]
+            await msg.click(text=perso[i])
+            msgs = await client.get_messages('CupLegendBot', 1)
+            pers.append(msgs[0])
+            await asyncio.sleep(1)
+        i = i+1
+
+async def cup_up():
+    global state, tume
+    while state==1:
+        date1=int(time.time())
+        await cup_up2()
+        date2=int(time.time())
+        date=date2-date1
+        await asyncio.sleep(tume-date)
+            
+
+async def cup_up2():
+    global pers
+    await asyncio.sleep(1)
+    bot = await client.get_entity('CupLegendBot')
+    i = 0
+    while i < 10:
+        if state==1:
+            msg = pers[i]
+            await msg.click(text="Выбрать")
+            await asyncio.sleep(1)
+            await client.send_message(bot, "/cup_up")
+            await asyncio.sleep(1)
+        i = i+1
 
 @client.on(events.NewMessage)
 async def my_event(event):
-    global last
+    global last, state
+    if event.message.text=="/start_cup" and state==0 and event.message.to_dict()['from_id']['user_id']==1776244625:
+        state=1
+        await pon()
+        await cup_up()
+    if event.message.text=="/stop_cup" and state==1 and event.message.to_dict()['from_id']['user_id']==1776244625:
+        state=0
     log = await client.get_entity(-1002357683604)
     bot = await client.get_entity('t.me/EpsilionWarBot')
     profile = cursor.execute('SELECT * FROM users WHERE user_id = ?', (1776244625,)).fetchone()
@@ -56,22 +106,6 @@ async def my_event(event):
     state1 = profile[3]
     state2 = profile[4]
     if str(event.message.from_id) == "PeerUser(user_id=1776244625)":
-        if event.message.text == "/start_cup_up" and state1 == 1:
-            await client.send_message(log, "Сессия уже запущена.")
-        if event.message.text == "/start_cup_up" and state1 == 0:
-            cursor.execute('UPDATE users SET state1 = ? WHERE user_id = ?', (1, 1776244625,))
-            connection.commit()
-            await asyncio.sleep(1)
-            await client.send_message(log, "Сессия успешно запущена.")
-            await cup_up()
-        if event.message.text == "/stop_cup_up" and state1 == 0:
-            await client.send_message(log, "Сессия уже остановлена.")
-        if event.message.text == "/stop_cup_up" and state1 == 1:
-            cursor.execute('UPDATE users SET state1 = ? WHERE user_id = ?', (0, 1776244625,))
-            connection.commit()
-            await client.send_message(log, "Сессия успешно остановлена.")
-        
-        
         if event.message.text == "/start_farm" and state2 == 0 or state2 == 2:
             cursor.execute('UPDATE users SET state2 = ? WHERE user_id = ?', (1, 1776244625,))
             connection.commit()
@@ -284,34 +318,6 @@ async def set_minhp(hp):
     cursor.execute('UPDATE users SET minhp = ? WHERE user_id = ?', (hp, 1776244625,))
     connection.commit()
     return(f"Успешно задано минимальное хп {hp}.")
-
-async def cup_up():
-    state1 = cursor.execute('SELECT * FROM users WHERE user_id = ?', (1776244625,)).fetchone()[3]
-    while state1 == 1:
-        bot1 = await client.get_entity('t.me/komila_ekhobot')
-        await client.send_message(bot1, "/cupup2")
-        await asyncio.sleep(201)
-        state1 = cursor.execute('SELECT * FROM users WHERE user_id = ?', (1776244625,)).fetchone()[3]
-
-async def cup_up2():
-    await asyncio.sleep(1)
-    bot = await client.get_entity('CupLegendBot')
-    i = 0
-    pers = ["Пудель2", "Пудель3", "Пудель4", "Пудель5", "Пудель6", "Пудель7", "Пудель8", "Пудель9", "Пудель10", "Пудель"]
-    while i < 10:
-        await client.send_message(bot, "/start MyHeros")
-        await asyncio.sleep(1)
-        msgs = await client.get_messages('CupLegendBot', 2)
-        msg = msgs[0]
-        await msg.click(text=pers[i])
-        msgs = await client.get_messages('CupLegendBot', 2)
-        msg = msgs[0]
-        await msg.click(text="Выбрать")
-        await asyncio.sleep(1)
-        await client.send_message(bot, "/cup_up")
-        await asyncio.sleep(1)
-        i = i+1
-
 
 
 if __name__ == '__main__':

@@ -75,8 +75,6 @@ async def cup_up2():
             await asyncio.sleep(1)
         i = i+1
 
-
-
 if __name__ == '__main__':
     client.start()
     client.run_until_disconnected()

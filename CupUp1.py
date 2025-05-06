@@ -45,7 +45,7 @@ async def my_event(event):
     global state
     if state2==0:
         state2=1
-        bot = await client.get_entity(7722092961)
+        bot = await client.get_entity(F_CardBot)
         while True:
             await client.sendmessage(bot, "🃏 Получить карту")
             await asyncio.sleep(10860)

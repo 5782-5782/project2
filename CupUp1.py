@@ -42,7 +42,7 @@ async def pon():
 
 @client.on(events.NewMessage)
 async def my_event(event):
-    global state
+    global state, state2
     if state2==0:
         state2=1
         bot = await client.get_entity(F_CardBot)

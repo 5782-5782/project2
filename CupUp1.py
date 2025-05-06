@@ -13,6 +13,7 @@ logging.basicConfig(level=logging.INFO)
 client = TelegramClient(StringSession(SESSION), API_ID, API_HASH, system_version='4.16.30-vxCUSTOM', device_model='aboba-windows-custom', app_version='1.1.0')
 pers=[]
 
+state2=0
 state=0
 tume=132
 
@@ -42,6 +43,12 @@ async def pon():
 @client.on(events.NewMessage)
 async def my_event(event):
     global state
+    if state2==0:
+        state2=1
+        bot = await client.get_entity(7722092961)
+        while True:
+            await client.sendmessage(bot, "🃏 Получить карту")
+            await asyncio.sleep(10860)
     if event.message.text=="/start_cup" and state==0 and event.message.to_dict()['from_id']['user_id']==1817889040:
         state=1
         await pon()

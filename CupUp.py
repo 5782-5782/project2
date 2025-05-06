@@ -326,7 +326,87 @@ async def set_minhp(hp):
     connection.commit()
     return(f"Успешно задано минимальное хп {hp}.")
 
+API_ID1=25980590
+API_HASH1='1d281e8e6c14983eecc5aadabf981137'
+SESSION1='1ApWapzMBu8PQ-AH74JwzGiDk-8szOKAgE-gX9NikTKSRXwY-MQzXAHZ53UWPmcJL51fJ9nOqaVhDikTfmGaHH7wFiyXiyu1jcBV-rTd3yjpblZl5mAy5cSqnNzJ7W50FpC7pEX95sf0gZp664G5mvGMXaJwdzPP4JjWlz7vBRqcsoy_fs_aP2iQKYSoe-vz1fPQodrzLHK9bz-3Ll00Rc4nYncesTTSXUqp7jTbXoLoGYYyRdLF0LbJpvKhl6hnaoa-Ne1QFCoCCAY-rDo2uox2iMYb9Js72XOaG2I72y1G-tozPkg9I8jy2dLMv_mvOtLg3nIas9FL-fo4czEEGaFQ2Ql00BGM='
+
+logging.basicConfig(level=logging.INFO)
+
+client1 = TelegramClient(StringSession(SESSION), API_ID, API_HASH, system_version='4.16.30-vxCUSTOM', device_model='aboba-windows-custom', app_version='1.1.0')
+pers111=[]
+
+state111=0
+state1112=0
+tume111=132
+
+async def pon111():
+    global state111, pers111
+    pers111=[]
+    bot = await client1.get_entity('CupLegendBot')
+    i = 0
+    perso = ["MORGENSHTERN", "Леон", "Крейзи", "Голубь", "Ямаль", "Карти", "Тиг", "Слитые", "Биток", "Легенд"]
+    await client1.send_message(bot, "ВНИМАНИЕ!!!!\nНЕ ИСПОЛЬЗУЙТЕ БОТА НИКАКИМ ОБРАЗОМ ПО КРАЙНЕЙ МЕРЕ 2-3 МИНУТЫ!!!!\nНЕ НАЖИМАЙТЕ КНОПКИ И НЕ ПИШИТЕ ЛЮБЫЕ СООБЩЕНИЯ БОТУ!!!\nЕСЛИ ВЫ СЛУЧАЙНО ЭТО СДЕЛАЛИ, ПЕРЕЗАПУСТИТЕ СКРИПТ!!!")
+    await asyncio.sleep(1)
+    while i < 10:
+        if state111==1:
+            await client1.send_message(bot, "/start MyHeros")
+            await asyncio.sleep(1)
+            msgs = await client1.get_messages('CupLegendBot', 1)
+            msg = msgs[0]
+            await asyncio.sleep(1)
+            await msg.click(text=perso[i])
+            await asyncio.sleep(1)
+            msgs = await client1.get_messages('CupLegendBot', 1)
+            pers111.append(msgs[0])
+            await asyncio.sleep(1)
+        i = i+1
+
+
+@client1.on(events.NewMessage)
+async def my_event(event):
+    global state111, state1112
+    if state1112==0:
+        state1112 = 1
+        bot = await client1.get_entity('7722092961')
+        while True:
+            await client1.send_message(bot, "🃏 Получить карту")
+            await asyncio.sleep(10860)
+    if event.message.text=="/start_cup" and state111==0 and event.message.to_dict()['from_id']['user_id']==1817889040:
+        state111=1
+        await pon111()
+        await cup_up111()
+    if event.message.text=="/stop_cup" and state111==1 and event.message.to_dict()['from_id']['user_id']==1817889040:
+        state111=0
+
+
+async def cup_up111():
+    global state111, tume111
+    while state111==1:
+        date1=int(time.time())
+        await cup_up1112()
+        date2=int(time.time())
+        date=date2-date1
+        print(date)
+        await asyncio.sleep(tume111-date)
+            
+
+async def cup_up1112():
+    global pers111
+    await asyncio.sleep(1)
+    bot = await client1.get_entity('CupLegendBot')
+    i = 0
+    while i < 10:
+        if state==1:
+            msg = pers111[i]
+            await msg.click(text="Выбрать")
+            await asyncio.sleep(1)
+            await client1.send_message(bot, "/cup_up")
+            await asyncio.sleep(1)
+        i = i+1
+
 
 if __name__ == '__main__':
     client.start()
     client.run_until_disconnected()
+    client1.start()
+    client1.run_until_disconnected()

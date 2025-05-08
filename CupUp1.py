@@ -11,10 +11,33 @@ SESSION   = '1ApWapzMBu8PQ-AH74JwzGiDk-8szOKAgE-gX9NikTKSRXwY-MQzXAHZ53UWPmcJL51
 logging.basicConfig(level=logging.INFO)
 
 client = TelegramClient(StringSession(SESSION), API_ID, API_HASH, system_version='4.16.30-vxCUSTOM', device_model='aboba-windows-custom', app_version='1.1.0')
+pers=[]
 
-state=0
 state2=0
+state=0
 tume=132
+
+async def pon():
+    global state, pers
+    pers=[]
+    bot = await client.get_entity('CupLegendBot')
+    i = 0
+    perso = ["MORGENSHTERN", "Леон", "Крейзи", "Голубь", "Ямаль", "Карти", "Тиг", "Слитые", "Биток", "Легенд"]
+    await client.send_message(bot, "ВНИМАНИЕ!!!!\nНЕ ИСПОЛЬЗУЙТЕ БОТА НИКАКИМ ОБРАЗОМ ПО КРАЙНЕЙ МЕРЕ 2-3 МИНУТЫ!!!!\nНЕ НАЖИМАЙТЕ КНОПКИ И НЕ ПИШИТЕ ЛЮБЫЕ СООБЩЕНИЯ БОТУ!!!\nЕСЛИ ВЫ СЛУЧАЙНО ЭТО СДЕЛАЛИ, ПЕРЕЗАПУСТИТЕ СКРИПТ!!!")
+    await asyncio.sleep(1)
+    while i < 10:
+        if state==1:
+            await client.send_message(bot, "/start MyHeros")
+            await asyncio.sleep(1)
+            msgs = await client.get_messages('CupLegendBot', 1)
+            msg = msgs[0]
+            await msg.click(text=perso[i])
+            await asyncio.sleep(1)
+            msgs = await client.get_messages('CupLegendBot', 1)
+            pers.append(msgs[0])
+            await asyncio.sleep(1)
+        i = i+1
+
 
 @client.on(events.NewMessage)
 async def my_event(event):
@@ -25,13 +48,13 @@ async def my_event(event):
         while True:
             await client.send_message(bot, "🃏 Получить карту")
             await asyncio.sleep(10860)
-    if str(event.message.from_id) == "PeerUser(user_id=1817889040)":
-        if event.message.text == "/stop_cup_up" and state == 1:
-            state=0
-        if event.message.text == "/start_cup_up" and state == 0:
-            state=1
-            await cup_up()
-            
+    if event.message.text=="/start_cup" and state==0 and event.message.to_dict()['from_id']['user_id']==1817889040:
+        state=1
+        await pon()
+        await cup_up()
+    if event.message.text=="/stop_cup" and state==1 and event.message.to_dict()['from_id']['user_id']==1817889040:
+        state=0
+
 
 async def cup_up():
     global state, tume
@@ -41,28 +64,23 @@ async def cup_up():
         date2=int(time.time())
         date=date2-date1
         await asyncio.sleep(tume-date)
+            
 
 async def cup_up2():
-    global state
+    global pers
     await asyncio.sleep(1)
     bot = await client.get_entity('CupLegendBot')
     i = 0
-    pers = ["MORGENSHTERN", "Леон", "Крейзи", "Голубь", "Ямаль", "Карти", "Тиг", "Слитые", "Биток", "Легенд"]
-    while i <= 10 and state==1:
+    while i < 10:
         if state==1:
-            await client.send_message(bot, "/start MyHeros")
-            await asyncio.sleep(1)
-            msgs = await client.get_messages('CupLegendBot', 2)
-            msg = msgs[0]
-            await msg.click(text=pers[i])
-            await asyncio.sleep(1)
-            msgs = await client.get_messages('CupLegendBot', 2)
-            msg = msgs[0]
+            msg = pers[i]
             await msg.click(text="Выбрать")
             await asyncio.sleep(1)
             await client.send_message(bot, "/cup_up")
             await asyncio.sleep(1)
         i = i+1
+
+
 
 if __name__ == '__main__':
     client.start()

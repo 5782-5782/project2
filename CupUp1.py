@@ -23,7 +23,7 @@ async def my_event(event):
         state2=1
         bot = await client.get_entity("F_CardBot")
         while True:
-            await client.sendmessage(bot, "🃏 Получить карту")
+            await client.send_message(bot, "🃏 Получить карту")
             await asyncio.sleep(10860)
     if str(event.message.from_id) == "PeerUser(user_id=1776244625)":
         if event.message.text == "/start_cup_up" and state == 1:

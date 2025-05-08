@@ -25,8 +25,8 @@ async def my_event(event):
         while True:
             await client.send_message(bot, "🃏 Получить карту")
             await asyncio.sleep(10860)
-    if str(event.message.from_id) == "PeerUser(user_id=1776244625)":
-        if event.message.text == "/start_cup_up" and state == 1:
+    if str(event.message.from_id) == "PeerUser(user_id=1817889040)":
+        if event.message.text == "/stop_cup_up" and state == 1:
             state=0
         if event.message.text == "/start_cup_up" and state == 0:
             state=1

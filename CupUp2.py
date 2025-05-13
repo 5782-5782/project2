@@ -1,6 +1,4 @@
-import telethon
 import logging
-import sqlite3
 import asyncio
 import time
 from telethon.sync import TelegramClient, events
@@ -15,11 +13,13 @@ logging.basicConfig(level=logging.INFO)
 client = TelegramClient(StringSession(SESSION), API_ID, API_HASH, system_version='4.16.30-vxCUSTOM', device_model='aboba-windows-custom', app_version='1.1.0')
 pers=[]
 
+state2=0
 state=0
-tume=200
+tume=132
 
 async def pon():
     global state, pers
+    pers=[]
     bot = await client.get_entity('CupLegendBot')
     i = 0
     perso = ["Мэг", "Ямаль", "Трэвис Скотт", "Френки", "Луми", "Бруно", "Хави", "Старик", "Гоат", "Рафа"]
@@ -32,6 +32,7 @@ async def pon():
             msgs = await client.get_messages('CupLegendBot', 1)
             msg = msgs[0]
             await msg.click(text=perso[i])
+            await asyncio.sleep(1)
             msgs = await client.get_messages('CupLegendBot', 1)
             pers.append(msgs[0])
             await asyncio.sleep(1)
@@ -40,40 +41,29 @@ async def pon():
 
 @client.on(events.NewMessage)
 async def my_event(event):
-    global state
-    if event.message.text=="/start_cup" and state==0:
+    global state, state2
+    if state2==0:
+        state2=1
+        bot = await client.get_entity("F_CardBot")
+        while True:
+            await client.send_message(bot, "🃏 Получить карту")
+            await asyncio.sleep(10860)
+    if event.message.text=="/start_cup" and state==0 and event.message.to_dict()['from_id']['user_id']==1817889040:
         state=1
         await pon()
         await cup_up()
-    if event.message.text=="/stop_cup" and state==1:
+    if event.message.text=="/stop_cup" and state==1 and event.message.to_dict()['from_id']['user_id']==1817889040:
         state=0
 
 
 async def cup_up():
     global state, tume
-    i=9
     while state==1:
-        i=i+1
         date1=int(time.time())
         await cup_up2()
         date2=int(time.time())
         date=date2-date1
-        print(date)
-        await asyncio.sleep(tume+3-date)
-        if i==10:
-            i=0
-            bot = await client.get_entity('CupLegendBot')
-            await client.send_message(bot, "/cup_up")
-            await asyncio.sleep(1)
-            await client.send_message(bot, "/cup_up")
-            msgs = await client.get_messages('CupLegendBot', 1)
-            msg=msgs[0]
-            try:
-                tume=int(msg.text.split("Подожди ещё 00:")[1].split(":")[0])*60+int(msg.text.split("Подожди ещё 00:")[1].split(".")[0].split(":")[1])
-            except:
-                print("error")
-                tume=250
-                i=9
+        await asyncio.sleep(tume-date)
             
 
 async def cup_up2():

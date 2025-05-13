@@ -48,11 +48,11 @@ async def my_event(event):
         while True:
             await client.send_message(bot, "🃏 Получить карту")
             await asyncio.sleep(10860)
-    if event.message.text=="/start_cup" and state==0 and event.message.to_dict()['from_id']['user_id']==1817889040:
+    if event.message.text=="/start_cup" and state==0 and event.message.to_dict()['from_id']['user_id']==6728865868:
         state=1
         await pon()
         await cup_up()
-    if event.message.text=="/stop_cup" and state==1 and event.message.to_dict()['from_id']['user_id']==1817889040:
+    if event.message.text=="/stop_cup" and state==1 and event.message.to_dict()['from_id']['user_id']==6728865868:
         state=0
 
 

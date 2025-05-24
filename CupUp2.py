@@ -1,87 +1,92 @@
-import logging
+import datetime
 import asyncio
-import time
-from telethon.sync import TelegramClient, events
-from telethon.sessions import StringSession
-
-API_ID=23371011
-API_HASH='065c5c8afeb1287e38eb2c457fcfdfd8'
-SESSION = '1ApWapzMBu2l1JOL4TH737z_Ocq_Js7SEIaz28SkHJNph_AMD_pwrFkuvLWOTvNBkpuOQYHrTyArIKlVGhSOb8gcGRPAWbm3djT7fr1nIwrr8RT8R6lFlccMeyjNgbfn78J06oPNPOcuNDt2TVzeccK3d0ddzG6fgVmhbf0QcLEYf5BODeCxZ2n2-SFWWmYJLwqXiQ8GXT1ldRkU50NR-3Bw4oF189JQezO8OVWIxVfcCGeYLKzDaZQX9QMBFTvEsMpJD5Uu8cdls_zF8pK_zXwltlZqKeN_OmTdLYubBYXWGlES0sZbyPEbbNYmLWE-S0qYNcxJGQB6L4y8ecNxF2Dx7DqXY2Ns='
+import logging
+from aiogram import Bot, Dispatcher, types
+from aiogram.filters import Command
+BOT_TOKEN = '8188395101:AAFm8J8eCQ-Fv1EKOLh1lzTKLEGxEv_Y2f0'
 
 logging.basicConfig(level=logging.INFO)
 
-client = TelegramClient(StringSession(SESSION), API_ID, API_HASH, system_version='4.16.30-vxCUSTOM', device_model='aboba-windows-custom', app_version='1.1.0')
-pers=[]
+CHANNEL_ID = -1002384182799
 
-state2=0
-state=0
-tume=132
+events = [
+    {
+        "name": "До нового года",
+        "month": 1,
+        "day": 1,
+        "hour": 0,
+        "minute": 0,
+        "second": 0,
+        "message_ids": [11]
+    },
+    {
+        "name": "До зимы",
+        "month": 12,
+        "day": 1,
+        "hour": 0,
+        "minute": 0,
+        "second": 0,
+        "message_ids": [12]
+    },
+    {
+        "name": "До лета",
+        "month": 6,
+        "day": 1,
+        "hour": 0,
+        "minute": 0,
+        "second": 0,
+        "message_ids": [13]
+    },
+    {
+        "name": "До дня рождения миши (@Mishi5782)",
+        "month": 6,
+        "day": 14,
+        "hour": 0,
+        "minute": 0,
+        "second": 0,
+        "message_ids": [14]
+    },
+]
 
-async def pon():
-    global state, pers
-    pers=[]
-    bot = await client.get_entity('CupLegendBot')
-    i = 0
-    perso = ["Мэг", "Ямаль", "Трэвис Скотт", "Френки", "Луми", "Бруно", "Хави", "Старик", "Гоат", "Рафа"]
-    await client.send_message(bot, "ВНИМАНИЕ!!!!\nНЕ ИСПОЛЬЗУЙТЕ БОТА НИКАКИМ ОБРАЗОМ ПО КРАЙНЕЙ МЕРЕ 2-3 МИНУТЫ!!!!\nНЕ НАЖИМАЙТЕ КНОПКИ И НЕ ПИШИТЕ ЛЮБЫЕ СООБЩЕНИЯ БОТУ!!!\nЕСЛИ ВЫ СЛУЧАЙНО ЭТО СДЕЛАЛИ, ПЕРЕЗАПУСТИТЕ СКРИПТ!!!")
-    await asyncio.sleep(1)
-    while i < 10:
-        if state==1:
-            await client.send_message(bot, "/start MyHeros")
-            await asyncio.sleep(1)
-            msgs = await client.get_messages('CupLegendBot', 1)
-            msg = msgs[0]
-            await msg.click(text=perso[i])
-            await asyncio.sleep(1)
-            msgs = await client.get_messages('CupLegendBot', 1)
-            pers.append(msgs[0])
-            await asyncio.sleep(1)
-        i = i+1
+bot = Bot(token=BOT_TOKEN)
+dp = Dispatcher()
 
+async def update_messages():
+    """Обновляет сообщения в канале с информацией о времени до событий."""
+    now = datetime.datetime.now()
+    for event in events:
+        event_datetime = datetime.datetime(now.year, event["month"], event["day"], event["hour"], event["minute"], event["second"])
 
-@client.on(events.NewMessage)
-async def my_event(event):
-    global state, state2
-    if state2==0:
-        state2=1
-        bot = await client.get_entity("F_CardBot")
-        while True:
-            await client.send_message(bot, "🃏 Получить карту")
-            await asyncio.sleep(10860)
-    if event.message.text=="/start_cup" and state==0 and event.message.to_dict()['from_id']['user_id']==6728865868:
-        state=1
-        await pon()
-        await cup_up()
-    if event.message.text=="/stop_cup" and state==1 and event.message.to_dict()['from_id']['user_id']==6728865868:
-        state=0
+        if event_datetime < now:
+            event_datetime = event_datetime.replace(year=now.year + 1)
 
+        time_to_event = event_datetime - now
 
-async def cup_up():
-    global state, tume
-    while state==1:
-        date1=int(time.time())
-        await cup_up2()
-        date2=int(time.time())
-        date=date2-date1
-        await asyncio.sleep(tume-date)
-            
+        time_to_event_formatted = str(time_to_event).split(".")[0]  # Убираем миллисекунды
 
-async def cup_up2():
-    global pers
-    await asyncio.sleep(1)
-    bot = await client.get_entity('CupLegendBot')
-    i = 0
-    while i < 10:
-        if state==1:
-            msg = pers[i]
-            await msg.click(text="Выбрать")
-            await asyncio.sleep(1)
-            await client.send_message(bot, "/cup_up")
-            await asyncio.sleep(1)
-        i = i+1
+        for message_id in event["message_ids"]:
+            try:
+                await bot.edit_message_text(
+                    chat_id=CHANNEL_ID,
+                    message_id=message_id,
+                    text=f"{event['name']}\n<blockquote>{time_to_event_formatted}</blockquote>", parse_mode='html'
+                )
+            except Exception as e:
+                print(f"{datetime.datetime.now()} Ошибка при обновлении сообщения {message_id}: {e}")
 
+async def scheduler():
+    """Запускает функцию обновления сообщений каждую секунду."""
+    print("Программа успешно запущена!")
+    while True:
+        await update_messages()
+        await asyncio.sleep(60)
 
+async def on_startup():
+    """Функция, вызываемая при запуске бота."""
+    await scheduler()
 
-if __name__ == '__main__':
-    client.start()
-    client.run_until_disconnected()
+async def main():
+    await on_startup()
+
+if __name__ == "__main__":
+    asyncio.run(main())

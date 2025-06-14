@@ -20,7 +20,7 @@ logging.basicConfig(level=logging.INFO)
 last = None
 pers=[]
 state=0
-tume=130
+tume=140
 
 
 
